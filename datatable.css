@@ -1,0 +1,165 @@
+/* Фиксация шапки для кастомной таблицы */
+.vanilla-datatable .table-responsive thead.sticky-top th {
+    position: sticky;
+    top: 0;
+    z-index: 2; /* Чтобы данные при скролле уходили ПОД шапку */
+    background-color: #212529; /* Цвет table-dark, чтобы данные не просвечивали */
+    border-bottom: 2px solid #323539;
+}
+/* ПАГИНАЦИЯ */
+/* Изменяем стиль активной страницы (делаем темно-серым вместо синего) */
+.vanilla-datatable .pagination .page-item.active .page-link {
+    background-color: #6c757d !important; /* Цвет как у btn-secondary */
+    border-color: #6c757d !important;
+    color: #fff !important;
+}
+
+/* Стили для обычных и ховер-состояний кнопок пагинации */
+.vanilla-datatable .pagination .page-link {
+    color: #495057 !important; /* Серый текст вместо синего */
+    border-color: #dee2e6 !important;
+}
+
+/* Цвет при наведении мыши на кнопку */
+.vanilla-datatable .pagination .page-link:hover {
+    color: #212529 !important;
+    background-color: #e9ecef !important;
+    border-color: #dee2e6 !important;
+}
+
+/* Убираем синее свечение (outline) при фокусе на кнопках */
+.vanilla-datatable .pagination .page-link:focus {
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25) !important; /* Мягкое серое свечение */
+}
+
+/* ОБЩИЕ СТИЛИ ТАБЛИЦЫ */
+/* Кастомный контейнер для прокрутки данных таблицы */
+.vanilla-datatable .dt-table-container {
+    min-height: 150px;
+    max-height: calc(100vh - 330px);
+    overflow-y: auto;
+}
+
+/* 🌟 ЭСТЕТИКА: Делаем скроллбар тонким и аккуратным под стиль таблицы */
+.vanilla-datatable .dt-table-container::-webkit-scrollbar {
+    width: 6px; /* Ширина бегунка */
+    height: 6px;
+}
+
+.vanilla-datatable .dt-table-container::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Цвет дорожки */
+    border-radius: 4px;
+}
+
+.vanilla-datatable .dt-table-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1; /* Цвет самого бегунка */
+    border-radius: 4px;
+}
+
+.vanilla-datatable .dt-table-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8; /* Цвет бегунка при наведении */
+}
+
+/* Для поддержки в Firefox */
+.vanilla-datatable .dt-table-container {
+    scrollbar-width: thin;
+    scrollbar-color: #c1c1c1 #f1f1f1;
+}
+
+/* СОРТИРОВКА */
+/* Базовый стиль для всех сортируемых заголовков: резервируем место под стрелочку справа */
+.vanilla-datatable th.dt-th-sortable {
+    position: relative;
+    padding-right: 22px !important;
+}
+
+/* Создаем невидимый контейнер для стрелочки по умолчанию */
+.vanilla-datatable th.dt-th-sortable::after {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.75rem;
+    color: #fff; /* Приглушенный серый цвет для нейтрального состояния */
+    /*color: #6c757d; !* Приглушенный серый цвет для нейтрального состояния *!*/
+    opacity: 0.1;
+    content: "↕"; /* Символ двухсторонней стрелки-подсказки */
+    transition: all 0.2s ease;
+}
+
+/* Подсвечиваем стрелочку при наведении мыши на сортируемый заголовок */
+.vanilla-datatable th.dt-th-sortable:hover::after {
+    opacity: 0.8;
+}
+
+/* СТИЛЬ ДЛЯ СОРТИРОВКИ ПО ВОЗРАСТАНИЮ (ASC) */
+.vanilla-datatable th.dt-sort-asc::after {
+    content: "▲"; /* Стрелочка вверх */
+    color: #fff !important; /* Яркий белый цвет для активного состояния */
+    opacity: 1 !important;
+}
+
+/* СТИЛЬ ДЛЯ СОРТИРОВКИ ПО УБЫВАНИЮ (DESC) */
+.vanilla-datatable th.dt-sort-desc::after {
+    content: "▼"; /* Стрелочка вниз */
+    color: #fff !important;
+    opacity: 1 !important;
+}
+
+/* СТИЛЬ ЧЕКБОКСОВ */
+/* Базовый контейнер для правильного позиционирования псевдоэлементов */
+.vanilla-datatable .form-check-input {
+    position: relative;
+    cursor: pointer;
+    border: 2px solid #ced4da !important;
+    border-radius: 4px;
+    background-color: #fff !important;
+    width: 17px;
+    height: 17px;
+    appearance: none; /* Отключаем дефолтные стили браузера */
+    -webkit-appearance: none;
+    transition: all 0.15s ease-in-out;
+}
+
+/* Ховер */
+.vanilla-datatable .form-check-input:hover {
+    border-color: #6c757d !important;
+}
+
+/* Состояние ВЫБРАН (активный фон без картинок) */
+.vanilla-datatable .form-check-input:checked {
+    background-color: #212529 !important; /* Угольный цвет */
+    border-color: #212529 !important;
+}
+
+/* Рисуем саму белую галочку через CSS-псевдоэлемент */
+.vanilla-datatable .form-check-input:checked::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 5px;
+    height: 9px;
+    border: solid #ffffff; /* Чистый белый цвет линии */
+    border-width: 0 2px 2px 0; /* Формируем прямой угол */
+    transform: rotate(45deg); /* Поворачиваем его на 45 градусов, превращая в галочку */
+}
+
+/* Убираем синюю тень и свечение */
+.vanilla-datatable .form-check-input:focus {
+    outline: 0 !important;
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.15) !important;
+}
+
+/* Выравнивание ячеек */
+.vanilla-datatable td .form-check-input,
+.vanilla-datatable th .form-check-input {
+    vertical-align: middle;
+    margin: 0;
+}
+
+
+
+
+
+

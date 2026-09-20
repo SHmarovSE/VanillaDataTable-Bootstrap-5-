@@ -15,7 +15,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
 </div>
 
-<p class=MsoNormal><b>Техническая документация: Класс <span class=SpellE>VanillaDataTable</span>
+<p class=MsoNormal><b>Класс <span class=SpellE>VanillaDataTable</span>
 (<span class=SpellE>Bootstrap</span> 5)<o:p></o:p></b></p>
 
 <p class=MsoNormal>Универсальный легковесный компонент на чистом JavaScript

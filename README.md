@@ -1,35 +1,7 @@
-<html xmlns:v="urn:schemas-microsoft-com:vml"
-xmlns:o="urn:schemas-microsoft-com:office:office"
-xmlns:w="urn:schemas-microsoft-com:office:word"
-xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
-xmlns="http://www.w3.org/TR/REC-html40">
+# Класс `VanillaDataTable` (Bootstrap 5)
 
+Универсальный легковесный компонент на чистом JavaScript (без jQuery) для создания интерактивных динамических таблиц на базе **Bootstrap 5**. Поддерживает серверную пагинацию, умную систему фокуса строк, динамические панели инструментов с разграничением прав на основе выделения элементов и атомарную перенумерацию порядка отображения записей.
 
-<body lang=RU style='tab-interval:35.4pt;word-wrap:break-word'>
-
-<div class=WordSection1>
-
-<div class=MsoNormal align=center style='text-align:center'>
-
-<hr size=1 width="100%" align=center>
-
-</div>
-
-<p class=MsoNormal><b>Класс <span class=SpellE>VanillaDataTable</span>
-(<span class=SpellE>Bootstrap</span> 5)<o:p></o:p></b></p>
-
-<p class=MsoNormal>Универсальный легковесный компонент на чистом JavaScript
-(без <span class=SpellE>jQuery</span>) для создания интерактивных динамических
-таблиц на базе <span class=SpellE><b>Bootstrap</b></span><b> 5</b>.
-Поддерживает серверную пагинацию, умную систему фокуса строк, динамические
-панели инструментов с разграничением прав на основе выделения элементов и
-атомарную перенумерацию порядка отображения записей.<o:p></o:p></p>
-
-<div class=MsoNormal align=center style='text-align:center'>
-
-<hr size=1 width="100%" align=center>
-
-</div>
 ## Новые возможности (v1.1.0)
 
 ### 1. Метод `destroy()`

@@ -251,332 +251,94 @@ console.log('Данные обновлены, фокус на строке со�
 * **`checkRow`** *(Function | null)*: Функция-предикат серверной автосинхронизации чекбоксов мультивыбора. Вызывается для каждого элемента массива при каждой новой загрузке данных. Если возвращает `true`, строка автоматически помечается галочкой и добавляется в карту выбранных элементов.
 
 
-<p class=MsoNormal><b><span style='font-family:"Segoe UI Emoji",sans-serif;
-mso-bidi-font-family:"Segoe UI Emoji"'>&#128221;</span> Полный пример
-комплексной инициализации<o:p></o:p></b></p>
-
-<p class=MsoNormal><i>// Инициализация таблицы с комплексной панелью кнопок и
-перенумерацией</i><o:p></o:p></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>const <span
-class=SpellE>projectTable</span> = new <span class=SpellE><span class=GramE>VanillaDataTable</span></span><span
-class=GramE>(</span>'#<span class=SpellE>myTableContainer</span>', {<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span><span class=SpellE>tableId</span>: '<span
-class=SpellE>crm</span>-leads-table',<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span><span class=SpellE>apiUrl</span>: '/<span
-class=SpellE>api</span>/v1/leads/list',<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span><span class=SpellE>keyField</span>: 'id',<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span><span class=SpellE>checkboxSelect</span>: false,<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span><span class=SpellE>showSearch</span>: true,<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span></span><span class=SpellE>showFilter</span>:
-<span class=SpellE>true</span>, <i>// Включаем панель локальной фильтрации</i><o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>    </span><o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>    </span><i>// Сортировка
-порядка строк</i><o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>    </span><span
-class=SpellE>showOrderButtons</span>: <span class=SpellE>true</span>,<o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>    </span><span
-class=SpellE><span lang=EN-US style='mso-ansi-language:EN-US'>idField</span></span><span
-lang=EN-US style='mso-ansi-language:EN-US'>: 'id',<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span><span class=SpellE>orderField</span>: '<span
-class=SpellE>sort_index</span>',<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span></span><span class=SpellE>extraFields</span>:
-['<span class=SpellE>project_id</span>'], <i>// Передаем контекст проекта на
-бэк</i><o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>    </span><o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>    </span><i>// Описываем
-конфигурацию колонок</i><o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>    </span><span
-class=SpellE>columns</span>: [<o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>        </span><span
-class=GramE>{ <span class=SpellE>field</span></span>: '<span class=SpellE>id</span>',
-<span class=SpellE>title</span>: 'ID', <span class=SpellE>visible</span>: <span
-class=SpellE><span class=GramE>false</span></span><span class=GramE> }</span>,<o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>        </span><span
-class=GramE><span lang=EN-US style='mso-ansi-language:EN-US'>{ field</span></span><span
-lang=EN-US style='mso-ansi-language:EN-US'>: '<span class=SpellE>sort_index</span>',
-title: '</span>Порядок<span lang=EN-US style='mso-ansi-language:EN-US'>', sortable:
-true, filter: 'none<span class=GramE>' }</span>,<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>        </span><span class=GramE>{ field</span>: '<span
-class=SpellE>created_at</span>', title: '</span>Дата<span style='mso-ansi-language:
-EN-US'> </span>создания<span lang=EN-US style='mso-ansi-language:EN-US'>', sortable:
-true, filter: 'search<span class=GramE>' }</span>,<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>        </span>{ <o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span>field: 'status', <o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span>title: '</span>Статус<span
-lang=EN-US style='mso-ansi-language:EN-US'>', <o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span>sortable: true, <o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span></span><span class=SpellE>filter</span>:
-'<span class=SpellE>select</span>', <i>// Генерирует уникальный выпадающий
-список в шапке</i><o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>            </span><span
-lang=EN-US style='mso-ansi-language:EN-US'>render: (<span class=SpellE>val</span>)
-=&gt; `&lt;span class=&quot;badge <span class=SpellE>bg</span>-primary&quot;&gt;${<span
-class=SpellE>val</span>}&lt;/span&gt;` <o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>        </span>},<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>        </span><span class=GramE>{ field</span>: 'title',
-title: '</span>Наименование<span lang=EN-US style='mso-ansi-language:EN-US'>', filter:
-'search<span class=GramE>' }</span><o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span></span>],<o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>    </span><o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>    </span><i>//
-Декларативная панель кастомных кнопок действий</i><o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>    </span><span
-class=SpellE>buttons</span>: [<o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>        </span><span
-lang=EN-US style='mso-ansi-language:EN-US'>{<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span>type: 'button',<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span>label: '&lt;<span class=SpellE>i</span>
-class=&quot;bi bi-plus-lg&quot;&gt;&lt;/<span class=SpellE>i</span>&gt; </span>Создать<span
-lang=EN-US style='mso-ansi-language:EN-US'>',<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span><span class=SpellE>className</span>:
-'<span class=SpellE>btn</span>-outline-success',<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span><span class=SpellE>requiresSelection</span>:
-false, <i>// </i></span><i>Доступна</i><i><span style='mso-ansi-language:EN-US'>
-</span>всегда</i><span lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span></span><span class=SpellE>action</span>:
-() =&gt; <span class=SpellE><span class=GramE>alert</span></span><span
-class=GramE>(</span>'Открываем модальное окно создания!')<o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>        </span><span
-lang=EN-US style='mso-ansi-language:EN-US'>},<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>        </span>{<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span>type: 'dropdown',<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span>label: '&lt;<span class=SpellE>i</span>
-class=&quot;bi bi-shield-lock&quot;&gt;&lt;/<span class=SpellE>i</span>&gt; </span>Администрирование<span
-lang=EN-US style='mso-ansi-language:EN-US'>',<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span><span class=SpellE>className</span>:
-'<span class=SpellE>btn</span>-outline-secondary',<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span>items: [<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>              </span><span
-style='mso-spacerun:yes'>  </span>{<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>                    </span>label: '&lt;<span
-class=SpellE>i</span> class=&quot;bi bi-pencil&quot;&gt;&lt;/<span
-class=SpellE>i</span>&gt; </span>Редактировать<span style='mso-ansi-language:
-EN-US'> </span>карточку<span lang=EN-US style='mso-ansi-language:EN-US'>',<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>                    </span></span><span class=SpellE>requiresSelection</span>:
-<span class=SpellE>true</span>, <i>// Активно только при выборе <span
-class=SpellE>tr</span></i><o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>                    </span><span
-lang=EN-US style='mso-ansi-language:EN-US'>action: (data) =&gt; <span
-class=GramE>console.log(</span>'</span>Редактируем<span style='mso-ansi-language:
-EN-US'> </span>объект<span lang=EN-US style='mso-ansi-language:EN-US'>:', data)<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>                </span>},<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>                </span><span class=GramE>{ type</span>:
-'divider<span class=GramE>' }</span>,<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>                </span>{<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>                    </span>label: '&lt;<span
-class=SpellE>i</span> class=&quot;bi bi-trash&quot;&gt;&lt;/<span class=SpellE>i</span>&gt;
-</span>Удалить<span style='mso-ansi-language:EN-US'> </span>запись<span
-lang=EN-US style='mso-ansi-language:EN-US'>',<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>                    </span><span class=SpellE>className</span>:
-'text-danger',<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>                    </span><span class=SpellE>requiresSelection</span>:
-true,<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>                    </span>action: (data) =&gt; {<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>                        </span>if(confirm('</span>Удалить<span
-lang=EN-US style='mso-ansi-language:EN-US'>?')) <span class=GramE>console.log(</span>'</span>Удаляем<span
-lang=EN-US style='mso-ansi-language:EN-US'> ID:', data.id);<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>                    </span>}<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>                </span>}<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span>]<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>        </span>}<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span>],<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span><o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span><i>// </i></span><i>Реализация</i><i><span
-style='mso-ansi-language:EN-US'> </span>хука</i><i><span style='mso-ansi-language:
-EN-US'> </span>рокировки</i><i><span style='mso-ansi-language:EN-US'> </span>полей</i><i><span
-style='mso-ansi-language:EN-US'> </span>порядка</i><span lang=EN-US
-style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span><span class=SpellE>onRenumberRow</span>: async
-(payload) =&gt; {<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>        </span></span><span class=SpellE>try</span> {<o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>            </span><span
-lang=EN-US style='mso-ansi-language:EN-US'>const response = await <span
-class=GramE>fetch(</span>'/<span class=SpellE>api</span>/v1/leads/swap-order',
-{<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>                </span>method: 'POST',<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>                </span>headers: <span class=GramE>{ '</span>Content-Type':
-'application/<span class=SpellE>json</span><span class=GramE>' }</span>,<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>                </span>body: <span class=SpellE>JSON.stringify</span>(payload)
-<i>// </i></span><i>улетит</i><i><span style='mso-ansi-language:EN-US'> </span>плоский</i><i><span
-lang=EN-US style='mso-ansi-language:EN-US'> JSON {id, <span class=SpellE>old_number</span>,
-<span class=SpellE>new_number</span>, <span class=SpellE>project_id</span>}</span></i><span
-lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span>});<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span>const res = await <span
-class=SpellE><span class=GramE>response.json</span></span>();<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span></span><span class=SpellE>return</span>
-<span class=SpellE><span class=GramE>res.success</span></span> === <span
-class=SpellE>true</span>; <i>// Возвращаем булево значение успеха транзакции</i><o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>        </span><span
-lang=EN-US style='mso-ansi-language:EN-US'>} catch (err) {<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span><span class=SpellE><span
-class=GramE>console.error</span></span>(err);<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span>return false;<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>        </span>}<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span>},<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span><o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span><span class=SpellE>onRowSelect</span>: (data,
-element) =&gt; {<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>        </span></span><span class=GramE>console.log(</span>'Текущая
-активная строка в системе:', data.id);<o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>    </span>}<o:p></o:p></p>
-
-<p class=MsoNormal>});<o:p></o:p></p>
-
-<div class=MsoNormal align=center style='text-align:center'>
-
-<hr size=1 width="100%" align=center>
-
-</div>
-
-<p class=MsoNormal><br style='mso-special-character:line-break'>
-<![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
-<![endif]><o:p></o:p></p>
-
-<p class=MsoNormal><o:p>&nbsp;</o:p></p>
-
-</div>
-
-</body>
-
-</html>
+## 📝 Полный пример комплексной инициализации
+
+```javascript
+// Инициализация таблицы с комплексной панелью кнопок и перенумерацией
+const projectTable = new VanillaDataTable('#myTableContainer', {
+  tableId: 'crm-leads-table',
+  apiUrl: '/api/v1/leads/list',
+  keyField: 'id',
+  checkboxSelect: false,
+  showSearch: true,
+  showFilter: true, // Включаем панель локальной фильтрации
+
+  // Сортировка порядка строк
+  showOrderButtons: true,
+  idField: 'id',
+  orderField: 'sort_index',
+  extraFields: ['project_id'], // Передаем контекст проекта на бэк
+
+  // Описываем конфигурацию колонок
+  columns: [
+    { field: 'id', title: 'ID', visible: false },
+    { field: 'sort_index', title: 'Порядок', sortable: true, filter: 'none' },
+    { field: 'created_at', title: 'Дата создания', sortable: true, filter: 'search' },
+    {
+      field: 'status',
+      title: 'Статус',
+      sortable: true,
+      filter: 'select', // Генерирует уникальный выпадающий список в шапке
+      render: (val) => `<span class="badge bg-primary">${val}</span>`
+    },
+    { field: 'title', title: 'Наименование', filter: 'search' }
+  ],
+
+  // Декларативная панель кастомных кнопок действий
+  buttons: [
+    {
+      type: 'button',
+      label: '<i class="bi bi-plus-lg"></i> Создать',
+      className: 'btn-outline-success',
+      requiresSelection: false, // Доступна всегда
+      action: () => alert('Открываем модальное окно создания!')
+    },
+    {
+      type: 'dropdown',
+      label: '<i class="bi bi-shield-lock"></i> Администрирование',
+      className: 'btn-outline-secondary',
+      items: [
+        {
+          label: '<i class="bi bi-pencil"></i> Редактировать карточку',
+          requiresSelection: true, // Активно только при выборе tr
+          action: (data) => console.log('Редактируем объект:', data)
+        },
+        { 
+          type: 'divider' 
+        },
+        {
+          label: '<i class="bi bi-trash"></i> Удалить запись',
+          className: 'text-danger',
+          requiresSelection: true,
+          action: (data) => {
+            if (confirm('Удалить?')) {
+              console.log('Удаляем ID:', data.id);
+            }
+          }
+        }
+      ]
+    }
+  ],
+
+  // Реализация хука рокировки полей порядка
+  onRenumberRow: async (payload) => {
+    try {
+      const response = await fetch('/api/v1/leads/swap-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload) // улетит плоский JSON {id, old_number, new_number, project_id}
+      });
+      
+      const res = await response.json();
+      return res.success === true; // Возвращаем булево значение успеха транзакции
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  },
+
+  onRowSelect: (data, element) => {
+    console.log('Текущая активная строка в системе:', data.id);
+  }
+});
+```

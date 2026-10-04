@@ -44,6 +44,9 @@ class VanillaDataTable {
             sortDir: ''  // Направление: 'ASC' или 'DESC'
         };
 
+        // ВАЖНО: сохраняем исходный HTML контейнера ДО сборки разметки
+        this.originalContainerHTML = this.container.innerHTML || "";
+
         // Внутреннее хранилище для данных ТЕКУЩЕЙ выделенной строки
         this._selectedRowData = null;
         this.searchTimeout = null;
@@ -51,7 +54,12 @@ class VanillaDataTable {
 
         this._buildLayout();
         this._bindEvents();
+        // Нативный контроллер для отмены внутренних fetch-запросов таблицы
+        this.abortController = new AbortController();
         this.load();
+
+        // ВЫСТАВЛЯЕМ ФЛАГ ИНИЦИАЛИЗАЦИИ ТУТ:
+        this.initialized = true;
     }
 
     /**
@@ -284,12 +292,14 @@ class VanillaDataTable {
                 const disabledAttr = isDisabled ? 'disabled' : '';
                 const disabledClass = isDisabled ? 'disabled' : '';
                 const titleAttr = btn.title ? `title="${btn.title}"` : '';
+                const styleAttr = btn.style ? `style="${btn.style}"` : '';
 
                 return `
             <button type="button" 
                     class="btn btn-sm ${customClass} ${disabledClass} dt-custom-btn" 
                     data-btn-idx="${btnIdx}" 
                     ${disabledAttr} 
+                    ${styleAttr} 
                     ${titleAttr}>
                 ${btn.label}
             </button>
@@ -425,6 +435,35 @@ class VanillaDataTable {
         };
     }
 
+    destroy() {
+        if (!this.initialized) return;
+
+        // 0. МГНОВЕННО ОБРЫВАЕМ ВСЕ ТЕКУЩИЕ ЗАПРОСЫ ТАБЛИЦЫ К API В СЕТИ
+        if (this.abortController) {
+            this.abortController.abort();
+            this.abortController = null;
+        }
+
+        // 1. Возвращаем контейнер макета в первозданный вид (очищаем всю сгенерированную Bootstrap-разметку)
+        if (this.container) {
+            this.container.innerHTML = this.originalContainerHTML;
+        }
+
+        // 2. Полностью зануляем ссылки на DOM-элементы, чтобы JavaScript очистил память
+        this.wrapper = null;
+        this.table = null;
+        this.body = null;
+        this.header = null;
+        this.footer = null;
+        this.pagers = [];
+        this.rows = [];
+        this.headings = [];
+        this.activeRows = [];
+        this.searching = false;
+
+        // Сбрасываем флаг инициализации
+        this.initialized = false;
+    }
 
 
     _bindEvents() {
@@ -794,7 +833,9 @@ class VanillaDataTable {
 
                 const separator = this.config.apiUrl.includes('?') ? '&' : '?';
                 const fullUrl = `${this.config.apiUrl}${separator}${params.toString()}`;
-                const response = await fetch(fullUrl);
+                const response = await fetch(fullUrl, {
+                    signal: this.abortController ? this.abortController.signal : null
+                });
 
                 if (!response.ok) {
                     let errorText = 'Сетевая ошибка';
@@ -1230,5 +1271,3 @@ class VanillaDataTable {
         URL.revokeObjectURL(url); // Освобождаем память Blob
     }
 }
-
-

@@ -79,108 +79,38 @@ console.log('Данные обновлены, фокус на строке со�
 ```
 
 
-<p class=MsoNormal><b><span style='font-family:"Segoe UI Emoji",sans-serif;
-mso-bidi-font-family:"Segoe UI Emoji"'>&#128194;</span> Блок 1: Конфигурация (<span
-class=SpellE>options</span>)<o:p></o:p></b></p>
+## 📂 Блок 1: Конфигурация (`options`)
 
-<p class=MsoNormal>Конфигурационный объект передается вторым параметром в
-конструктор класса: <span class=SpellE>new</span> <span class=SpellE><span
-class=GramE>VanillaDataTable</span></span><span class=GramE>(</span><span
-class=SpellE>containerSelector</span>, <span class=SpellE>options</span>).<o:p></o:p></p>
+Конфигурационный объект передается вторым параметром в конструктор класса: `new VanillaDataTable(containerSelector, options)`.
 
-<p class=MsoNormal><b><span style='font-family:"Segoe UI Emoji",sans-serif;
-mso-bidi-font-family:"Segoe UI Emoji"'>&#9881;&#65039;</span> Базовые параметры
-и управление интерфейсом<o:p></o:p></b></p>
+### ⚙️ Базовые параметры и управление интерфейсом
 
-<ul style='margin-top:0cm' type=disc>
- <li class=MsoNormal style='mso-list:l6 level1 lfo1;tab-stops:list 36.0pt'><span
-     class=SpellE><b>tableId</b></span> <i>(<span class=SpellE>String</span> | <span
-     class=SpellE>null</span>)</i>: Уникальный ID для генерируемого HTML-тега &lt;<span
-     class=SpellE>table</span>&gt;. По умолчанию: <span class=SpellE>null</span>.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l6 level1 lfo1;tab-stops:list 36.0pt'><span
-     class=SpellE><b>apiUrl</b></span> <i>(<span class=SpellE>String</span>)</i>:
-     URL-адрес <span class=SpellE>эндпоинта</span> бэкенда для получения
-     JSON-данных таблицы.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l6 level1 lfo1;tab-stops:list 36.0pt'><span
-     class=SpellE><b>perPageOptions</b></span> <i>(<span class=SpellE>Array</span>)</i>:
-     Массив доступных опций лимита строк в <span class=SpellE>селекте</span>.
-     Пример: [10, 25, 50, &quot;<span class=SpellE>all</span>&quot;].<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l6 level1 lfo1;tab-stops:list 36.0pt'><span
-     class=SpellE><b>defaultLimit</b></span> <i>(Number)</i>: Количество
-     записей на страницу по умолчанию. По умолчанию: 10.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l6 level1 lfo1;tab-stops:list 36.0pt'><span
-     class=SpellE><b>searchPlaceholder</b></span> <i>(<span class=SpellE>String</span>)</i>:
-     Текст-подсказка в поле глобального поиска. По умолчанию: 'Поиск...'.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l6 level1 lfo1;tab-stops:list 36.0pt'><span
-     class=SpellE><b>showSearch</b></span> <i>(<span class=SpellE>Boolean</span>)</i><span
-     class=GramE>: Показывать</span> или скрывать строку глобального поиска. По
-     умолчанию: <span class=SpellE>true</span>.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l6 level1 lfo1;tab-stops:list 36.0pt'><span
-     class=SpellE><b>showFilter</b></span> <i>(<span class=SpellE>Boolean</span>)</i><span
-     class=GramE>: Включать</span> или выключать генерацию панели <span
-     class=SpellE>in-memory</span> фильтров колонок. По умолчанию: <span
-     class=SpellE>false</span>.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l6 level1 lfo1;tab-stops:list 36.0pt'><span
-     class=SpellE><b>excelExport</b></span> <i>(<span class=SpellE>Boolean</span>)</i>:
-     Флаг отображения кнопки экспорта данных в формат Excel XML. По умолчанию: <span
-     class=SpellE>true</span>.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l6 level1 lfo1;tab-stops:list 36.0pt'><span
-     class=SpellE><b>excelPrefix</b></span> <i>(<span class=SpellE>String</span>)</i>:
-     Префикс имени скачиваемого файла экспорта. По умолчанию: '<span
-     class=SpellE>export</span>'.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l6 level1 lfo1;tab-stops:list 36.0pt'><span
-     class=SpellE><b>checkboxSelect</b></span> <i>(<span class=SpellE>Boolean</span>)</i><span
-     class=GramE>: Включает</span> техническую колонку <span class=SpellE>мультивыбора</span>
-     чекбоксами. По умолчанию: <span class=SpellE>false</span>.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l6 level1 lfo1;tab-stops:list 36.0pt'><span
-     class=SpellE><b>keyField</b></span> <i>(<span class=SpellE>String</span>)</i>:
-     Имя уникального поля объекта (первичного ключа), используемого как индекс
-     для <span class=SpellE>мультивыбора</span>. По умолчанию: '<span
-     class=SpellE>id</span>'.<o:p></o:p></li>
-</ul>
+* **`tableId`** *(String | null)*: Уникальный ID для генерируемого HTML-тега `<table>`. По умолчанию: `null`.
+* **`apiUrl`** *(String)*: URL-адрес эндпоинта бэкенда для получения JSON-данных таблицы.
+* **`perPageOptions`** *(Array)*: Массив доступных опций лимита строк в селекте. Пример: `[10, 25, 50, "all"]`.
+* **`defaultLimit`** *(Number)*: Количество записей на страницу по умолчанию. По умолчанию: `10`.
+* **`searchPlaceholder`** *(String)*: Текст-подсказка в поле глобального поиска. По умолчанию: `'Поиск...'`.
+* **`showSearch`** *(Boolean)*: Показывать или скрывать строку глобального поиска. По умолчанию: `true`.
+* **`showFilter`** *(Boolean)*: Включать или выключать генерацию панели in-memory фильтров колонок. По умолчанию: `false`.
+* **`showOrderButtons`** *(Boolean)*: Показывать кнопки перемещения строк «Вверх / Вниз». По умолчанию: `false`.
+* **`excelExport`** *(Boolean)*: Флаг отображения кнопки экспорта данных в формат Excel XML. По умолчанию: `true`.
+* **`excelPrefix`** *(String)*: Префикс имени скачиваемого файла экспорта. По умолчанию: `'export'`.
+* **`checkboxSelect`** *(Boolean)*: Включает техническую колонку мультивыбора чекбоксами. По умолчанию: `false`.
+* **`keyField`** *(String)*: Имя уникального поля объекта (первичного ключа), используемого как индекс для мультивыбора. По умолчанию: `'id'`.
 
-<p class=MsoNormal><b><span style='font-family:"Segoe UI Emoji",sans-serif;
-mso-bidi-font-family:"Segoe UI Emoji"'>&#128736;&#65039;</span> Конфигурация
-колонок (<span class=SpellE>columns</span>)<o:p></o:p></b></p>
+---
 
-<p class=MsoNormal>Массив объектов, каждый из которых описывает поведение
-столбца:<o:p></o:p></p>
+### 🔲 Конфигурация колонок (`columns`)
 
-<ul style='margin-top:0cm' type=disc>
- <li class=MsoNormal style='mso-list:l3 level1 lfo2;tab-stops:list 36.0pt'><span
-     class=SpellE><b>field</b></span> <i>(<span class=SpellE>String</span>)</i>:
-     Имя ключа в объекте данных.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l3 level1 lfo2;tab-stops:list 36.0pt'><span
-     class=SpellE><b>title</b></span> <i>(<span class=SpellE>String</span>)</i>:
-     Отображаемый заголовок колонки.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l3 level1 lfo2;tab-stops:list 36.0pt'><span
-     class=SpellE><b>visible</b></span> <i>(<span class=SpellE>Boolean</span>)</i>:
-     Управление видимостью колонки на экране. По умолчанию: <span class=SpellE>true</span>.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l3 level1 lfo2;tab-stops:list 36.0pt'><span
-     class=SpellE><b>sortable</b></span> <i>(<span class=SpellE>Boolean</span>)</i><span
-     class=GramE>: Разрешить</span> серверную сортировку по данной колонке.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l3 level1 lfo2;tab-stops:list 36.0pt'><b><span
-     lang=EN-US style='mso-ansi-language:EN-US'>filter</span></b><span
-     lang=EN-US style='mso-ansi-language:EN-US'> <i>(String)</i>: </span>Тип<span
-     style='mso-ansi-language:EN-US'> </span>локального<span style='mso-ansi-language:
-     EN-US'> </span>фильтра<span lang=EN-US style='mso-ansi-language:EN-US'> ('none',
-     'select', 'search').<o:p></o:p></span></li>
- <li class=MsoNormal style='mso-list:l3 level1 lfo2;tab-stops:list 36.0pt'><b><span
-     lang=EN-US style='mso-ansi-language:EN-US'>render</span></b><span
-     lang=EN-US style='mso-ansi-language:EN-US'> <i>(Function | undefined)</i>:
-     </span>Кастомный<span style='mso-ansi-language:EN-US'> </span><span
-     class=SpellE>форматировщик</span><span style='mso-ansi-language:EN-US'> </span>содержимого<span
-     style='mso-ansi-language:EN-US'> </span>ячейки<span lang=EN-US
-     style='mso-ansi-language:EN-US'>. </span>Принимает параметры (<span
-     class=SpellE>cellValue</span>, <span class=SpellE>rowData</span>). Должен
-     возвращать строку или HTML-строку.<o:p></o:p></li>
-</ul>
+Массив объектов, каждый из которых описывает поведение столбца:
 
-<div class=MsoNormal align=center style='text-align:center'>
+* **`field`** *(String)*: Имя ключа в объекте данных.
+* **`title`** *(String)*: Отображаемый заголовок колонки.
+* **`visible`** *(Boolean)*: Управление видимостью колонки на экране. По умолчанию: `true`.
+* **`sortable`** *(Boolean)*: Разрешить серверную сортировку по данной колонке.
+* **`filter`** *(String)*: Тип локального фильтра (`'none'`, `'select'`, `'search'`).
+* **`render`** *(Function | undefined)*: Кастомный форматировщик содержимого ячейки. Принимает параметры `(cellValue, rowData)`. Должен возвращать строку или HTML-строку.
 
-<hr size=1 width="100%" align=center>
-
-</div>
 
 <p class=MsoNormal><b><span style='font-family:"Segoe UI Emoji",sans-serif;
 mso-bidi-font-family:"Segoe UI Emoji"'>&#127899;&#65039;</span> Блок 2:

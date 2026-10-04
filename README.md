@@ -169,111 +169,46 @@ console.log('Данные обновлены, фокус на строке со�
 💡 **Важная деталь архитектуры `disabled`:** Если абсолютно все значимые вложенные пункты дропдауна (`items`) помечены как `requiresSelection: true`, класс таблицы автоматически заблокирует саму главную кнопку-триггер выпадающего списка в DOM до тех пор, пока строка не будет выбрана пользователем. Если хотя бы один пункт является глобальным (`requiresSelection: false`), дропдаун будет открываться всегда, точечно отключая внутренние пункты.
 
 
-<p class=MsoNormal><b><span style='font-family:"Segoe UI Emoji",sans-serif;
-mso-bidi-font-family:"Segoe UI Emoji"'>&#128256;</span> Блок 3: Перенумерация и
-рокировка строк (<span class=SpellE>onRenumberRow</span>)<o:p></o:p></b></p>
+## 🔃 Блок 3: Перенумерация и рокировка строк (`onRenumberRow`)
 
-<p class=MsoNormal>Для активации встроенного механизма физического изменения
-порядка следования записей используются следующие параметры конфигурации:<o:p></o:p></p>
+Для активации встроенного механизма физического изменения порядка следования записей используются следующие параметры конфигурации:
 
-<ul style='margin-top:0cm' type=disc>
- <li class=MsoNormal style='mso-list:l5 level1 lfo3;tab-stops:list 36.0pt'><span
-     class=SpellE><b>showOrderButtons</b></span> <i>(<span class=SpellE>Boolean</span>)</i><span
-     class=GramE>: Включает</span> отображение жестко зафиксированной <span
-     class=GramE>группы .<span class=SpellE>btn</span></span><span
-     class=SpellE>-group</span> с кнопками <b>«Вверх»</b> и <b>«Вниз»</b> на
-     левом краю панели управления.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l5 level1 lfo3;tab-stops:list 36.0pt'><span
-     class=SpellE><b>idField</b></span> <i>(<span class=SpellE>String</span>)</i>:
-     Имя поля-идентификатора строки, которое будет передано на бэкенд. По
-     умолчанию берет значение из <span class=SpellE>keyField</span>.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l5 level1 lfo3;tab-stops:list 36.0pt'><span
-     class=SpellE><b>orderField</b></span> <i>(<span class=SpellE>String</span>)</i>:
-     Имя физического числового поля порядка отображения данных в БД (например, <span
-     class=SpellE>sort_order</span>). По умолчанию: '<span class=SpellE>display_order</span>'.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l5 level1 lfo3;tab-stops:list 36.0pt'><span
-     class=SpellE><b>extraFields</b></span> <i>(<span class=SpellE>Array</span>)</i>:
-     Массив имен сопутствующих полей строки, значения которых критически важно
-     отправить на бэкенд вместе с запросом рокировки (например, идентификаторы
-     групп, родительских категорий или проектов). По умолчанию: [].<o:p></o:p></li>
-</ul>
+* **`showOrderButtons`** *(Boolean)*: Включает отображение жестко зафиксированной группы `.btn-group` с кнопками «Вверх» и «Вниз» на левом краю панели управления.
+* **`idField`** *(String)*: Имя поля-идентификатора строки, которое будет передано на бэкенд. По умолчанию берет значение из `keyField`.
+* **`orderField`** *(String)*: Имя физического числового поля порядка отображения данных в БД (например, `sort_order`). По умолчанию: `'display_order'`.
+* **`extraFields`** *(Array)*: Массив имен сопутствующих полей строки, значения которых критически важно отправить на бэкенд вместе с запросом рокировки (например, идентификаторы групп, родительских категорий или проектов). По умолчанию: `[]`.
 
-<p class=MsoNormal><b><span style='font-family:"Segoe UI Emoji",sans-serif;
-mso-bidi-font-family:"Segoe UI Emoji"'>&#9889;</span> Хук <span class=SpellE>onRenumberRow</span>(<span
-class=SpellE>resultPayload</span>)<o:p></o:p></b></p>
+---
 
-<p class=MsoNormal>Асинхронная функция-обработчик, которая вызывается при клике
-на стрелки изменения порядка. Она обязана отправить запрос на сервер и вернуть <span
-class=SpellE><b>true</b></span> в случае успешного выполнения операции в БД,
-чтобы таблица инициировала умное обновление данных.<o:p></o:p></p>
+### ⚡ Хук `onRenumberRow(resultPayload)`
 
-<p class=MsoNormal><b>Формат передаваемого плоского объекта (<span
-class=SpellE>resultPayload</span>):<o:p></o:p></b></p>
+Асинхронная функция-обработчик, которая вызывается при клике на стрелки изменения порядка. Она обязана отправить запрос на сервер и вернуть `true` в случае успешного выполнения операции в БД, чтобы таблица инициировала умное обновление данных.
 
-<p class=MsoNormal>Класс генерирует строго плоскую, очищенную структуру данных,
-готовую к разбору на стороне API без лишних вычислений:<o:p></o:p></p>
+#### Формат передаваемого плоского объекта (`resultPayload`):
 
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>{<o:p></o:p></span></p>
+Класс генерирует строго плоскую, очищенную структуру данных, готовую к разбору на стороне API без лишних вычислений:
 
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>  </span>&quot;id&quot;: &quot;1106&quot;,<o:p></o:p></span></p>
+```json
+{
+  "id": "1106",
+  "old_number": "22",
+  "new_number": "21",
+  "project_id": "12"
+}
+```
 
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>  </span>&quot;<span class=SpellE><span class=GramE>old</span>_number</span>&quot;:
-&quot;22&quot;,<o:p></o:p></span></p>
+---
 
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>  </span>&quot;<span class=SpellE><span class=GramE>new</span>_number</span>&quot;:
-&quot;21&quot;,<o:p></o:p></span></p>
+### 🔴 КРИТИЧЕСКИ ВАЖНО: Алгоритм бэкенд-транзакции
 
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>  </span></span>&quot;<span class=SpellE>project_id</span>&quot;:
-&quot;12&quot; <o:p></o:p></p>
+На поле, указанном в `orderField`, в базе данных практически всегда накладывается индекс уникальности (Unique Constraint). Чтобы избежать ошибок дублирования ключей при одновременном обновлении записей, ваш серверный скрипт в рамках **единой базы транзакции** должен выполнять рокировку по следующей схеме:
 
-<p class=MsoNormal>}<o:p></o:p></p>
+1. **Поиск соседа:** Сервер принимает параметры (`id`, `old_number`, `new_number`, `extra_fields`) и находит сопутствующую запись, у которой поле порядка на текущий момент равно `new_number` (с учетом ограничений из `extra_fields`). Фиксирует её `ID_соседа`.
+2. **Временный буфер:** Для `ID_соседа` устанавливается заведомо недостижимый временный порядковый номер (например, `100 000 000`). Это освобождает ячейку `new_number`.
+3. **Обновление активной строки:** Для целевой записи по пришедшему `id` устанавливается значение `new_number`.
+4. **Закрытие рокировки:** Для `ID_соседа` устанавливается значение `old_number`.
+5. **Фиксация (Commit):** Транзакция закрывается, гарантируя атомарность и целостность индексов.
 
-<p class=MsoNormal><b><span style='font-family:"Segoe UI Emoji",sans-serif;
-mso-bidi-font-family:"Segoe UI Emoji"'>&#128308;</span> КРИТИЧЕСКИ ВАЖНО:
-Алгоритм бэкенд-транзакции<o:p></o:p></b></p>
-
-<p class=MsoNormal>На поле, указанном в <span class=SpellE>orderField</span>, в
-базе данных практически всегда накладывается индекс уникальности (<span
-class=SpellE>Unique</span> <span class=SpellE>Constraint</span>). Чтобы
-избежать ошибок дублирования ключей при одновременном обновлении записей, ваш
-серверный скрипт в рамках <b>единой базы транзакции</b> должен выполнять
-рокировку по следующей схеме:<o:p></o:p></p>
-
-<ol style='margin-top:0cm' start=1 type=1>
- <li class=MsoNormal style='mso-list:l4 level1 lfo4;tab-stops:list 36.0pt'><b>Поиск
-     соседа:</b> Сервер принимает параметры (<span class=SpellE>id</span>, <span
-     class=SpellE>old_number</span>, <span class=SpellE>new_number</span>, <span
-     class=SpellE>extra_fields</span>) и находит сопутствующую запись, у
-     которой поле порядка на текущий момент равно <span class=SpellE>new_number</span>
-     (с учетом ограничений из <span class=SpellE>extra_fields</span>).
-     Фиксирует её <span class=SpellE>ID_соседа</span>.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l4 level1 lfo4;tab-stops:list 36.0pt'><b>Временный
-     буфер<span class=GramE>:<span style='font-weight:normal'> Для</span></span></b>
-     <span class=SpellE>ID_соседа</span> устанавливается заведомо недостижимый
-     временный порядковый номер (например, 100 000 000). Это освобождает ячейку
-     <span class=SpellE>new_number</span>.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l4 level1 lfo4;tab-stops:list 36.0pt'><b>Обновление
-     активной строки<span class=GramE>:<span style='font-weight:normal'> Для</span></span></b>
-     целевой записи по пришедшему <span class=SpellE>id</span> устанавливается
-     значение <span class=SpellE>new_number</span>.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l4 level1 lfo4;tab-stops:list 36.0pt'><b>Закрытие
-     рокировки<span class=GramE>:<span style='font-weight:normal'> Для</span></span></b>
-     <span class=SpellE>ID_соседа</span> устанавливается значение <span
-     class=SpellE>old_number</span>.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l4 level1 lfo4;tab-stops:list 36.0pt'><b>Фиксация
-     (<span class=SpellE>Commit</span>):</b> Транзакция закрывается, гарантируя
-     атомарность и целостность индексов.<o:p></o:p></li>
-</ol>
-
-<div class=MsoNormal align=center style='text-align:center'>
-
-<hr size=1 width="100%" align=center>
-
-</div>
 
 <p class=MsoNormal><b><span style='font-family:"Segoe UI Emoji",sans-serif;
 mso-bidi-font-family:"Segoe UI Emoji"'>&#128295;</span> Блок 4: Публичные

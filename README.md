@@ -210,134 +210,46 @@ console.log('Данные обновлены, фокус на строке со�
 5. **Фиксация (Commit):** Транзакция закрывается, гарантируя атомарность и целостность индексов.
 
 
-<p class=MsoNormal><b><span style='font-family:"Segoe UI Emoji",sans-serif;
-mso-bidi-font-family:"Segoe UI Emoji"'>&#128295;</span> Блок 4: Публичные
-методы класса<o:p></o:p></b></p>
+## 🔧 Блок 4: Публичные методы класса
 
-<p class=MsoNormal>Эти методы доступны для вызова на экземпляре созданного
-класса (например, <span class=SpellE>const</span> <span class=SpellE>table</span>
-= <span class=SpellE>new</span> <span class=SpellE>VanillaDataTable</span>(...);
-<span class=SpellE><span class=GramE>table.reload</span></span><span
-class=GramE>();)</span>.<o:p></o:p></p>
+Эти методы доступны для вызова на экземпляре созданного класса (например, `const table = new VanillaDataTable(...); table.reload();`).
 
-<p class=MsoNormal><b><span style='font-family:"Segoe UI Emoji",sans-serif;
-mso-bidi-font-family:"Segoe UI Emoji"'>&#128260;</span></b><b><span
-style='mso-ansi-language:EN-US'> <span lang=EN-US>async <span class=GramE>reload(</span><span
-class=SpellE>resetPage</span> = true, <span class=SpellE>keepSelection</span> =
-false)<o:p></o:p></span></span></b></p>
+### 🔄 `async reload(resetPage = true, keepSelection = false)`
 
-<p class=MsoNormal>Принудительно запрашивает свежие данные с сервера и
-полностью перерисовывает содержимое таблицы.<o:p></o:p></p>
+Принудительно запрашивает свежие данные с сервера и полностью перерисовывает содержимое таблицы.
 
-<ul style='margin-top:0cm' type=disc>
- <li class=MsoNormal style='mso-list:l1 level1 lfo5;tab-stops:list 36.0pt'><span
-     class=SpellE><b>resetPage</b></span> <i>(<span class=SpellE>Boolean</span>)</i><span
-     class=GramE>: При</span> значении <span class=SpellE>true</span>
-     сбрасывает пагинацию на 1-ю страницу (используется при новом поиске). При <span
-     class=SpellE>false</span> — оставляет пользователя на текущей странице
-     (используется при рокировке или точечном изменении данных).<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l1 level1 lfo5;tab-stops:list 36.0pt'><span
-     class=SpellE><b>keepSelection</b></span> <i>(<span class=SpellE>Boolean</span>)</i>:
-     Умный режим удержания фокуса. Если <span class=SpellE>true</span> (и <span
-     class=SpellE>resetPage</span> === <span class=SpellE>false</span>), метод
-     перед очисткой DOM запоминает ID текущей выделенной строки, дожидается
-     ответа сервера, перерисовывает таблицу и автоматически восстанавливает
-     фокус на ней с обновлением всех данных в памяти.<o:p></o:p></li>
-</ul>
+* **`resetPage`** *(Boolean)*: При значении `true` сбрасывает пагинацию на 1-ю страницу (используется при новом поиске). При `false` — оставляет пользователя на текущей странице (используется при рокировке или точечном изменении данных).
+* **`keepSelection`** *(Boolean)*: Умный режим удержания фокуса. Если `true` (и `resetPage === false`), метод перед очисткой DOM запоминает ID текущей выделенной строки, дожидается ответа сервера, перерисовывает таблицу и автоматически восстанавливает фокус на ней с обновлением всех данных в памяти.
 
-<p class=MsoNormal><b><span style='font-family:"Segoe UI Emoji",sans-serif;
-mso-bidi-font-family:"Segoe UI Emoji"'>&#127919;</span> <span class=SpellE><span
-class=GramE>selectRow</span></span><span class=GramE>(</span><span
-class=SpellE>fieldName</span>, <span class=SpellE>value</span>)<o:p></o:p></b></p>
+### 🎯 `selectRow(fieldName, value)`
 
-<p class=MsoNormal>Публичный метод-локатор, предназначенный для программного
-выделения строки как изнутри внутренних механизмов, так и из внешних скриптов
-управления приложением (например, при интеграции со сторонними картами,
-деревьями категорий или формами).<o:p></o:p></p>
+Публичный метод-локатор, предназначенный для программного выделения строки как изнутри внутренних механизмов, так и из внешних скриптов управления приложениеем (например, при интеграции со сторонними картами, деревьями категорий или формами).
 
-<ul style='margin-top:0cm' type=disc>
- <li class=MsoNormal style='mso-list:l0 level1 lfo6;tab-stops:list 36.0pt'><span
-     class=SpellE><b>fieldName</b></span> <i>(<span class=SpellE>String</span>)</i>:
-     Имя ключа объекта, по которому ведется поиск ('<span class=SpellE>id</span>',
-     '<span class=SpellE>uuid</span>').<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l0 level1 lfo6;tab-stops:list 36.0pt'><span
-     class=SpellE><b>value</b></span> <i>(<span class=SpellE>Any</span>)</i>:
-     Искомое значение.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l0 level1 lfo6;tab-stops:list 36.0pt'><b>Возвращает</b>:
-     <span class=SpellE>Boolean</span> (<span class=SpellE>true</span> — если
-     строка найдена и успешно подсвечена в UI, <span class=SpellE>false</span> —
-     если запись на текущей странице отсутствует, при этом внутреннее состояние
-     _<span class=SpellE>selectedRowData</span> безопасно очищается).<o:p></o:p></li>
-</ul>
+* **`fieldName`** *(String)*: Имя ключа объекта, по которому ведется поиск (`'id'`, `'uuid'`).
+* **`value`** *(Any)*: Искомое значение.
+* **Возвращает:** *Boolean* (`true` — если строка найдена и успешно подсвечена в UI, `false` — если запись на текущей странице отсутствует, при этом внутреннее состояние `_selectedRowData` безопасно очищается).
 
-<p class=MsoNormal><b><span style='font-family:"Segoe UI Emoji",sans-serif;
-mso-bidi-font-family:"Segoe UI Emoji"'>&#128269;</span></b><b><span
-style='mso-ansi-language:EN-US'> <span lang=EN-US>async <span class=SpellE><span
-class=GramE>searchAndSelect</span></span><span class=GramE>(</span>id, <span
-class=SpellE>keyField</span> = 'id')<o:p></o:p></span></span></b></p>
+### 🔍 `async searchAndSelect(id, keyField = 'id')`
 
-<p class=MsoNormal>Специализированный метод сквозного поиска. Устанавливает
-значение глобального поиска в переданный <span class=SpellE>id</span>,
-сбрасывает пагинацию на 1-ю страницу, загружает данные и выполняет <span
-class=SpellE>автовыделение</span> найденной строки в UI.<o:p></o:p></p>
+Специализированный метод сквозного поиска. Устанавливает значение глобального поиска в переданный `id`, сбрасывает пагинацию на 1-ю страницу, загружает данные и выполняет автовыделение найденной строки в UI.
 
-<p class=MsoNormal><b><span style='font-family:"Segoe UI Emoji",sans-serif;
-mso-bidi-font-family:"Segoe UI Emoji"'>&#129533;</span> <span class=SpellE><span
-class=GramE>clearSelection</span></span><span class=GramE>(</span>)<o:p></o:p></b></p>
+### 🧼 `clearSelection()`
 
-<p class=MsoNormal><span class=SpellE>Программно</span> сбрасывает текущее
-активное выделение строки, удаляет CSS-<span class=GramE>класс .<span
-class=SpellE>table</span></span><span class=SpellE>-active</span> у элементов &lt;<span
-class=SpellE>tr</span>&gt; (если на них не установлен чекбокс <span
-class=SpellE>мультивыбора</span>), очищает переменную состояния и отправляет
-управляющим кастомным кнопкам сигнал на блокировку.<o:p></o:p></p>
+Программно сбрасывает текущее активное выделение строки, удаляет CSS-класс `.table-active` у элементов `<tr>` (если на них не установлен чекбокс мультивыбора), очищает переменную состояния и отправляет управляющим кастомным кнопкам сигнал на блокировку.
 
-<div class=MsoNormal align=center style='text-align:center'>
+### 💥 `destroy()`
 
-<hr size=1 width="100%" align=center>
+Полностью уничтожает экземпляр класса, удаляет сгенерированную HTML-разметку таблицы из DOM-дерева, сбрасывает внутренние настройки и останавливает активные процессы для предотвращения утечек памяти в браузере.
 
-</div>
+---
 
-<p class=MsoNormal><b><span style='mso-ascii-font-family:Calibri;mso-hansi-font-family:
-Calibri;mso-bidi-font-family:Calibri'>&#129693;</span> Блок 5: Хуки обратного
-вызова (<span class=SpellE>Callbacks</span>)<o:p></o:p></b></p>
+## 🔌 Блок 5: Хуки обратного вызова (Callbacks)
 
-<ul style='margin-top:0cm' type=disc>
- <li class=MsoNormal style='mso-list:l7 level1 lfo7;tab-stops:list 36.0pt'><span
-     class=SpellE><b>fetchDataProvider</b></span> <i>(<span class=SpellE>Function</span>
-     | <span class=SpellE>null</span>)</i>: Альтернативный поставщик данных.
-     Если передан, класс полностью отказывается от встроенного механизма <span
-     class=SpellE>fetch</span>(<span class=SpellE>apiUrl</span>) и вызывает эту
-     функцию, передавая в неё объект текущего состояния таблицы (<span
-     class=SpellE>page</span>, <span class=SpellE>limit</span>, <span
-     class=SpellE>search</span>, <span class=SpellE>sortBy</span>, <span
-     class=SpellE>sortDir</span>). Должна возвращать объект формата <span
-     class=GramE>{ <span class=SpellE>items</span></span>: [...], <span
-     class=SpellE>total</span>: <span class=GramE>Number }</span>.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l7 level1 lfo7;tab-stops:list 36.0pt'><span
-     class=SpellE><b>onRowSelect</b></span> <i>(<span class=SpellE>Function</span>
-     | <span class=SpellE>null</span>)</i><span class=GramE>: Вызывается</span>
-     каждый раз, когда пользователь или система делает строку активной.
-     Передает параметры (<span class=SpellE>selectedRowData</span>, <span
-     class=SpellE>rowElement</span>).<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l7 level1 lfo7;tab-stops:list 36.0pt'><span
-     class=SpellE><b>onClearSelection</b></span> <i>(<span class=SpellE>Function</span>
-     | <span class=SpellE>null</span>)</i><span class=GramE>: Вызывается</span>
-     в момент полного программного или ручного сброса выделения строки.<o:p></o:p></li>
- <li class=MsoNormal style='mso-list:l7 level1 lfo7;tab-stops:list 36.0pt'><span
-     class=SpellE><b>checkRow</b></span> <i>(<span class=SpellE>Function</span>
-     | <span class=SpellE>null</span>)</i>: Функция-предикат серверной <span
-     class=SpellE>автосинхронизации</span> чекбоксов <span class=SpellE>мультивыбора</span>.
-     Вызывается для каждого элемента массива при каждой новой загрузке данных.
-     Если возвращает <span class=SpellE>true</span>, строка автоматически
-     помечается галочкой и добавляется в карту выбранных элементов.<o:p></o:p></li>
-</ul>
+* **`fetchDataProvider`** *(Function | null)*: Альтернативный поставщик данных. Если передан, класс полностью отказывается от встроенного механизма `fetch(apiUrl)` и вызывает эту функцию, передавая в неё объект текущего состояния таблицы (`page`, `limit`, `search`, `sortBy`, `sortDir`). Должна возвращать объект формата `{ items: [...], total: Number }`.
+* **`onRowSelect`** *(Function | null)*: Вызывается каждый раз, когда пользователь или система делает строку активной. Передает параметры `(selectedRowData, rowElement)`.
+* **`onClearSelection`** *(Function | null)*: Вызывается в момент полного программного или ручного сброса выделения строки.
+* **`checkRow`** *(Function | null)*: Функция-предикат серверной автосинхронизации чекбоксов мультивыбора. Вызывается для каждого элемента массива при каждой новой загрузке данных. Если возвращает `true`, строка автоматически помечается галочкой и добавляется в карту выбранных элементов.
 
-<div class=MsoNormal align=center style='text-align:center'>
-
-<hr size=1 width="100%" align=center>
-
-</div>
 
 <p class=MsoNormal><b><span style='font-family:"Segoe UI Emoji",sans-serif;
 mso-bidi-font-family:"Segoe UI Emoji"'>&#128221;</span> Полный пример

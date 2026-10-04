@@ -314,3 +314,29 @@ const projectTable = new VanillaDataTable('#myTableContainer', {
   }
 });
 ```
+
+## 🌐 Быстрое подключение через CDN (jsDelivr)
+
+Вы можете подключить библиотеку напрямую в HTML-код вашего проекта. На выбор доступно два варианта подключения:
+
+### Вариант 1: Жесткая ссылка на конкретную версию (Рекомендуется для продакшена)
+Гарантирует 100% стабильность. Код никогда не изменится автоматически, даже если выйдет обновление библиотеки.
+
+```html
+<!-- Стили компонента (версия v1.1.0) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SHmarovSE/VanillaDataTable-Bootstrap-5-@v1.1.0/datatable.min.css">
+
+<!-- Скрипт компонента (версия v1.1.0) -->
+<script src="https://cdn.jsdelivr.net/gh/SHmarovSE/VanillaDataTable-Bootstrap-5-@v1.1.0/datatable.min.js"></script>
+```
+
+### Вариант 2: Ссылка на самую последнюю версию (`@latest`)
+Удобно, если вы хотите автоматически получать все свежие исправления багов и минорные улучшения без необходимости вручную менять ссылки на сайте.
+
+```html
+<!-- Автоматически загрузит стили последней версии -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SHmarovSE/VanillaDataTable-Bootstrap-5-@latest/datatable.min.css">
+
+<!-- Автоматически загрузит скрипт последней версии -->
+<script src="https://cdn.jsdelivr.net/gh/SHmarovSE/VanillaDataTable-Bootstrap-5-@latest/datatable.min.js"></script>
+```

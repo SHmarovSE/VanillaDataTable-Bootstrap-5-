@@ -112,177 +112,62 @@ console.log('Данные обновлены, фокус на строке со�
 * **`render`** *(Function | undefined)*: Кастомный форматировщик содержимого ячейки. Принимает параметры `(cellValue, rowData)`. Должен возвращать строку или HTML-строку.
 
 
-<p class=MsoNormal><b><span style='font-family:"Segoe UI Emoji",sans-serif;
-mso-bidi-font-family:"Segoe UI Emoji"'>&#127899;&#65039;</span> Блок 2:
-Динамические кнопки (<span class=SpellE>buttons</span>)<o:p></o:p></b></p>
+## 🎛️ Блок 2: Динамические кнопки (`buttons`)
 
-<p class=MsoNormal>Параметр <span class=SpellE><b>buttons</b></span> — это
-декларативный массив, описывающий кастомные элементы управления на верхней
-панели над шапкой таблицы. Компонент поддерживает два типа элементов: одиночные
-кнопки и многоуровневые выпадающие списки (<span class=SpellE>дропдауны</span>).<o:p></o:p></p>
+Параметр `buttons` — это декларативный массив, описывающий кастомные элементы управления на верхней панели над шапкой таблицы. Компонент поддерживает два типа элементов: одиночные кнопки и многоуровневые выпадающие списки (дропдауны).
 
-<p class=MsoNormal><b><span style='font-family:"Segoe UI Emoji",sans-serif;
-mso-bidi-font-family:"Segoe UI Emoji"'>&#128142;</span> Настройки одиночной
-кнопки (<span class=SpellE>type</span>: '<span class=SpellE>button</span>')<o:p></o:p></b></p>
+---
 
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>{<o:p></o:p></span></p>
+### 💎 Настройки одиночной кнопки (`type: 'button'`)
 
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span>type: 'button',<o:p></o:p></span></p>
+```javascript
+{
+  type: 'button',
+  label: '<i class="bi bi-plus-lg"></i> Добавить', // Текст или HTML-иконка
+  title: 'Создать новую запись',                   // Всплывающая подсказка
+  className: 'btn-outline-success',               // Кастомный класс Bootstrap 5
+  style: 'background-color: #28a745; color: #fff;', // Кастомные инлайн-стили элемента
+  requiresSelection: false,                       // true — кнопка заблокирована, пока не выбрана строка tr
+  action: (selectedRowData, rowElement) => {      // Функция-колбэк при клике
+    console.log("Данные выбранной строки:", selectedRowData);
+  }
+}
+```
 
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span>label: '&lt;<span class=SpellE>i</span>
-class=&quot;bi bi-plus-lg&quot;&gt;&lt;/<span class=SpellE>i</span>&gt; </span>Добавить<span
-lang=EN-US style='mso-ansi-language:EN-US'>', <i>// </i></span><i>Текст</i><i><span
-style='mso-ansi-language:EN-US'> </span>или</i><i><span lang=EN-US
-style='mso-ansi-language:EN-US'> HTML-</span>иконка</i><span lang=EN-US
-style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
+---
 
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span></span><span class=SpellE>title</span>: 'Создать
-новую запись<span class=GramE>',<span style='mso-spacerun:yes'>   </span></span><span
-style='mso-spacerun:yes'>              </span><i>// Всплывающая подсказка</i><o:p></o:p></p>
+### 📂 Настройки выпадающего списка (`type: 'dropdown'`)
 
-<p class=MsoNormal><span style='mso-spacerun:yes'>    </span><span
-class=SpellE><span lang=EN-US style='mso-ansi-language:EN-US'>className</span></span><span
-lang=EN-US style='mso-ansi-language:EN-US'>: '<span class=SpellE>btn</span>-outline-success<span
-class=GramE>',<span style='mso-spacerun:yes'>   </span></span><span
-style='mso-spacerun:yes'>           </span><i>// </i></span><i>Кастомный</i><i><span
-style='mso-ansi-language:EN-US'> </span>класс</i><i><span lang=EN-US
-style='mso-ansi-language:EN-US'> Bootstrap 5</span></i><span lang=EN-US
-style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
+Используется для компактной группировки смежных или контекстных действий над строкой.
 
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span></span><span class=SpellE>requiresSelection</span>:
-<span class=SpellE><span class=GramE>false</span></span><span class=GramE>,<span
-style='mso-spacerun:yes'>   </span></span><span
-style='mso-spacerun:yes'>                   </span><i>// <span class=SpellE>true</span>
-— кнопка заблокирована, пока не выбрана строка <span class=SpellE>tr</span></i><o:p></o:p></p>
+```javascript
+{
+  type: 'dropdown',
+  label: '<i class="bi bi-gear"></i> Действия', // Текст кнопки-триггера дропдауна
+  title: 'Операции над данными',                // Всплывающая подсказка
+  className: 'btn-outline-secondary',           // Кастомный класс Bootstrap 5
+  style: 'margin-right: 5px;',                  // Кастомные инлайн-стили элемента
+  items: [                                      // Массив вложенных пунктов меню
+    {
+      label: '<i class="bi bi-pencil"></i> Редактировать',
+      requiresSelection: true,                  // Пункт станет активным только при выделении tr
+      action: (selectedRowData, rowElement) => { /* Логика */ }
+    },
+    { 
+      type: 'divider'                           // Специальный тип для рендера разделительной линии
+    },
+    {
+      label: '<i class="bi bi-trash"></i> Удалить',
+      className: 'text-danger',                 // Стилизация текста пункта меню
+      requiresSelection: true,
+      action: (selectedRowData) => { /* Логика */ }
+    }
+  ]
+}
+```
 
-<p class=MsoNormal><span style='mso-spacerun:yes'>    </span><span lang=EN-US
-style='mso-ansi-language:EN-US'>action: (<span class=SpellE>selectedRowData</span>,
-<span class=SpellE>rowElement</span>) =&gt; <span class=GramE>{<span
-style='mso-spacerun:yes'>  </span></span><span
-style='mso-spacerun:yes'>   </span><i>// </i></span><i>Функция</i><i><span
-lang=EN-US style='mso-ansi-language:EN-US'>-</span><span class=SpellE>колбэк</span></i><i><span
-style='mso-ansi-language:EN-US'> </span>при</i><i><span style='mso-ansi-language:
-EN-US'> </span>клике</i><span lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
+💡 **Важная деталь архитектуры `disabled`:** Если абсолютно все значимые вложенные пункты дропдауна (`items`) помечены как `requiresSelection: true`, класс таблицы автоматически заблокирует саму главную кнопку-триггер выпадающего списка в DOM до тех пор, пока строка не будет выбрана пользователем. Если хотя бы один пункт является глобальным (`requiresSelection: false`), дропдаун будет открываться всегда, точечно отключая внутренние пункты.
 
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>        </span></span><span class=GramE>console.log(</span>&quot;Данные
-выбранной строки:&quot;, <span class=SpellE>selectedRowData</span>);<o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>    </span>}<o:p></o:p></p>
-
-<p class=MsoNormal>}<o:p></o:p></p>
-
-<p class=MsoNormal><b><span style='font-family:"Segoe UI Emoji",sans-serif;
-mso-bidi-font-family:"Segoe UI Emoji"'>&#128450;&#65039;</span> Настройки
-выпадающего списка (<span class=SpellE>type</span>: '<span class=SpellE>dropdown</span>')<o:p></o:p></b></p>
-
-<p class=MsoNormal>Используется для компактной группировки смежных или
-контекстных действий над строкой.<o:p></o:p></p>
-
-<p class=MsoNormal>{<o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>    </span><span
-class=SpellE>type</span>: '<span class=SpellE>dropdown</span>',<o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>    </span><span
-class=SpellE>label</span>: '&lt;i <span class=SpellE>class</span>=&quot;<span
-class=SpellE>bi</span> <span class=SpellE>bi-gear</span><span class=GramE>&quot;&gt;&lt;</span>/i&gt;
-Действия<span class=GramE>',<span style='mso-spacerun:yes'>  </span><i>/</i></span><i>/
-Текст кнопки-триггера <span class=SpellE>дропдауна</span></i><o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>    </span><span lang=EN-US
-style='mso-ansi-language:EN-US'>title: '</span>Операции<span style='mso-ansi-language:
-EN-US'> </span>над<span style='mso-ansi-language:EN-US'> </span>данными<span
-lang=EN-US style='mso-ansi-language:EN-US'>',<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span><span class=SpellE>className</span>: '<span
-class=SpellE>btn</span>-outline-secondary',<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>    </span></span><span class=SpellE>items</span>: <span
-class=GramE>[ <i>/</i></span><i>/ Массив вложенных пунктов меню</i><o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>        </span>{<o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>            </span><span
-lang=EN-US style='mso-ansi-language:EN-US'>label: '&lt;<span class=SpellE>i</span>
-class=&quot;bi bi-pencil&quot;&gt;&lt;/<span class=SpellE>i</span>&gt; </span>Редактировать<span
-lang=EN-US style='mso-ansi-language:EN-US'>',<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span></span><span class=SpellE>requiresSelection</span>:
-<span class=SpellE><span class=GramE>true</span></span><span class=GramE>,<span
-style='mso-spacerun:yes'>   </span></span><span
-style='mso-spacerun:yes'>           </span><i>// Пункт станет активным только
-при выделении <span class=SpellE>tr</span></i><o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>            </span><span
-class=SpellE>action</span>: (<span class=SpellE>selectedRowData</span>, <span
-class=SpellE>rowElement</span>) =&gt; <span class=GramE>{ <i>/</i></span><i>*
-Логика *<span class=GramE>/<span style='font-style:normal'> }</span></span></i><o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>        </span>},<o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>        </span><span
-class=GramE>{ <span class=SpellE>type</span></span>: '<span class=SpellE>divider</span><span
-class=GramE>' }</span>,<span style='mso-spacerun:yes'>                      
-</span><i>// Специальный тип для рендера разделительной линии</i><o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>        </span><span
-lang=EN-US style='mso-ansi-language:EN-US'>{<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span>label: '&lt;<span class=SpellE>i</span>
-class=&quot;bi bi-trash&quot;&gt;&lt;/<span class=SpellE>i</span>&gt; </span>Удалить<span
-lang=EN-US style='mso-ansi-language:EN-US'>',<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span></span><span class=SpellE>className</span>:
-'<span class=SpellE>text-danger</span><span class=GramE>',<span
-style='mso-spacerun:yes'>   </span></span><span
-style='mso-spacerun:yes'>           </span><i>// Стилизация текста пункта меню</i><o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>            </span><span
-class=SpellE><span lang=EN-US style='mso-ansi-language:EN-US'>requiresSelection</span></span><span
-lang=EN-US style='mso-ansi-language:EN-US'>: true,<o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>            </span>action: (<span class=SpellE>selectedRowData</span>)
-=&gt; <span class=GramE>{ <i>/</i></span><i>* </i></span><i>Логика</i><i><span
-lang=EN-US style='mso-ansi-language:EN-US'> *<span class=GramE>/<span
-style='font-style:normal'> }</span></span></span></i><span lang=EN-US
-style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
-style='mso-spacerun:yes'>        </span></span>}<o:p></o:p></p>
-
-<p class=MsoNormal><span style='mso-spacerun:yes'>    </span>]<o:p></o:p></p>
-
-<p class=MsoNormal>}<o:p></o:p></p>
-
-<p class=MsoNormal><b><span style='font-family:"Segoe UI Emoji",sans-serif;
-mso-bidi-font-family:"Segoe UI Emoji"'>&#128161;</span> Важная деталь
-архитектуры <span class=SpellE>disabled</span><span class=GramE>:<span
-style='font-weight:normal'> Если</span></span></b> абсолютно <b>все</b>
-значимые вложенные пункты <span class=SpellE>дропдауна</span> (<span
-class=SpellE>items</span>) помечены как <span class=SpellE>requiresSelection</span>:
-<span class=SpellE>true</span>, класс таблицы автоматически заблокирует саму
-главную кнопку-триггер выпадающего списка в DOM до тех пор, пока строка не
-будет выбрана пользователем. Если хотя бы один пункт является глобальным (<span
-class=SpellE>requiresSelection</span>: <span class=SpellE>false</span>), <span
-class=SpellE>дропдаун</span> будет открываться всегда, точечно отключая
-внутренние пункты.<o:p></o:p></p>
-
-<div class=MsoNormal align=center style='text-align:center'>
-
-<hr size=1 width="100%" align=center>
-
-</div>
 
 <p class=MsoNormal><b><span style='font-family:"Segoe UI Emoji",sans-serif;
 mso-bidi-font-family:"Segoe UI Emoji"'>&#128256;</span> Блок 3: Перенумерация и
